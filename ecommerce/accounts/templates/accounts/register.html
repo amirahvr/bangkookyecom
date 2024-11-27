@@ -1,0 +1,200 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #ffe4e6;
+            font-family: Arial, sans-serif;
+        }
+
+        .register-container {
+            background-color: #ffffff;
+            padding: 2em 2.5em;
+            max-width: 700px;
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border: 3px solid #ffccd5;
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #ff6b81;
+            margin-bottom: 0.5em;
+            font-size: 2em;
+        }
+
+        p {
+            color: #8f8f8f;
+            margin-bottom: 1.5em;
+            font-size: 1em;
+            line-height: 1.5;
+        }
+
+        .messages {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5em;
+            color: #b00020;
+        }
+
+        .messages li {
+            background-color: #ffd6e0;
+            padding: 0.6em;
+            margin-bottom: 0.5em;
+            border-radius: 8px;
+            font-size: 0.9em;
+            text-align: left;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1em;
+            margin-bottom: 1.3em;
+        }
+
+        .form-group {
+            flex: 1;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            color: #ff6b81;
+            margin-bottom: 0.3em;
+            font-size: 0.95em;
+        }
+
+        input[type="text"], input[type="password"], input[type="email"], select {
+            width: 100%;
+            padding: 0.8em;
+            border: 1.5px solid #ffccd5;
+            border-radius: 8px;
+            background-color: #fff0f3;
+            font-size: 0.95em;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            padding: 0.8em;
+            background-color: #ff6b81;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            margin-top: 1em;
+            font-weight: bold;
+        }
+
+        .submit-btn:hover {
+            background-color: #ff3b5f;
+        }
+
+        .text-reset-password {
+            margin-top: 1.5em;
+            font-size: 0.9em;
+            color: #8f8f8f;
+        }
+
+        .text-reset-password a {
+            color: #ff6b81;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .text-reset-password a:hover {
+            color: #ff3b5f;
+        }
+
+        .text-error {
+            color: #b00020;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        {% block content %}
+        <h2>Register</h2>
+        <p>Buat akun terlebih dahulu untuk menikmati produk kami</p>
+
+        {% if msg %}
+        <span class="text-error">{{ msg | safe }}</span>
+        {% endif %}
+
+        <ul class="messages">
+            {% for field, errors in form.errors.items %}
+                {% for error in errors %}
+                <li class="error">{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="username">Username <span class="text-danger">*</span></label>
+                    {{ form.username }}
+                </div>
+                <div class="form-group">
+                    <label for="phone_number">Nomor WhatsApp <span class="text-danger">*</span></label>
+                    {{ form.phone_number }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first_name">First Name <span class="text-danger">*</span></label>
+                    {{ form.first_name }}
+                </div>
+                <div class="form-group">
+                    <label for="password1">Password <span class="text-danger">*</span></label>
+                    {{ form.password1 }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="last_name">Last Name <span class="text-danger">*</span></label>
+                    {{ form.last_name }}
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password <span class="text-danger">*</span></label>
+                    {{ form.password2 }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="email">E-Mail Aktif <span class="text-danger">*</span></label>
+                    {{ form.email }}
+                </div>
+            </div>
+
+            <input type="submit" value="Daftar Akun" class="submit-btn">
+        </form>
+
+        <div class="text-reset-password">
+            Sudah punya akun? <a href="{% url 'login' %}" class="reset-password">Log In di sini</a>
+        </div>
+        {% endblock %}
+    </div>
+</body>
+</html>

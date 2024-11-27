@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Bangkookiy{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+    <!-- Navbar -->
+    {% block navbar %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/">Bangkookiy</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!-- Dropdown Kategori -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Kategori
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                        {% for category in categories %}
+                            <li>
+                                <a class="dropdown-item" href="{% url 'category_detail' category.slug %}">
+                                    {{ category.name }}
+                                </a>
+                            </li>
+                        {% empty %}
+                            <li><a class="dropdown-item" href="#">Tidak ada kategori</a></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            </ul>
+            <!-- Cart di sebelah kanan -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart/">
+                        <i class="fa fa-shopping-cart fa-2x"></i> <!-- Ikon keranjang besar -->
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+{% endblock %}
+
+
+    <!-- Blok Utama -->
+    <div class="custom-container mt-4">
+        {% block list_content %}
+        <!-- Konten default dari product_list -->
+        <div class="row">
+            {% for product in products %}
+                <div class="col-md-4 col-sm-6 col-lg-3 mb-4 d-flex align-items-stretch">
+                    <div class="card w-100">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                        {% else %}
+                            <img src="https://via.placeholder.com/300" class="card-img-top" alt="No image available">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+                            <p class="card-text mt-auto"><strong>Rp{{ product.price|floatformat:2 }}</strong></p>
+                            <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">Lihat Detail</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <p class="text-muted">Tidak ada produk dalam kategori ini.</p>
+            {% endfor %}
+        </div>
+        {% endblock %}
+
+        {% block extra_content %}
+        <!-- Kosong secara default -->
+        {% endblock %}
+    </div>
+
+    <!-- Footer -->
+    {% block footer %}
+    <footer class="text-center mt-4">
+        <p>&copy; 2024 Toko Kami. All rights reserved.</p>
+    </footer>
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

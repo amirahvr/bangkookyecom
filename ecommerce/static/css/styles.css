@@ -1,0 +1,122 @@
+/* Umum */
+body {
+    background-color: #ffe4e6; /* Pink pastel lembut */
+    font-family: 'Arial', sans-serif;
+    color: #5c5c5c; /* Warna teks yang lembut */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    background-color: #ffc2d1; /* Pink pastel lebih terang */
+}
+
+.navbar-brand,
+.nav-link {
+    color: #5c5c5c !important; /* Warna teks navbar */
+}
+
+.nav-link:hover {
+    color: #ff6f91 !important; /* Pink lebih mencolok saat hover */
+}
+
+/* Sidebar */
+.list-group-item {
+    background-color: #fff0f3; /* Pink pastel lembut */
+    border: none;
+    color: #5c5c5c;
+}
+
+.list-group-item a {
+    color: #5c5c5c;
+    text-decoration: none;
+}
+
+.list-group-item a:hover {
+    color: #ff6f91;
+    font-weight: bold;
+}
+
+.badge {
+    background-color: #ff6f91; /* Pink mencolok */
+    color: white;
+}
+
+/* Card Produk */
+.card {
+    display: flex;
+    flex-direction: column; /* Konten vertikal */
+    justify-content: space-between; /* Jarak antar elemen */
+    height: 100%; /* Pastikan tinggi card seragam */
+    border: 1px solid #eaeaea; /* Tambahkan border tipis */
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Bayangan ringan */
+    transition: transform 0.2s ease-in-out; /* Animasi hover */
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #ff6f91; /* Warna teks judul */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Produk akan sedikit membesar saat di-hover */
+}
+
+.card-text {
+    font-size: 0.9rem;
+    color: #5c5c5c;
+}
+
+.card-img-top {
+    object-fit: cover; /* Sesuaikan gambar */
+    height: 200px; /* Tetapkan tinggi konsisten */
+    width: 100%; /* Penuhi lebar card */
+    border-top-left-radius: 8px; /* Sudut gambar lebih halus */
+    border-top-right-radius: 8px; /* Sudut gambar lebih halus */
+}
+
+.btn-primary {
+    background-color: #ff6f91;
+    border-color: #ff6f91;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff3b6c; /* Pink lebih gelap */
+}
+
+/* Responsivitas Grid */
+.row > [class*="col-"] {
+    display: flex;
+    justify-content: center; /* Memastikan semua item sejajar secara horizontal */
+}
+
+.col-md-4,
+.col-sm-6,
+.col-lg-3 {
+    padding: 0 10px; /* Tambahkan padding antar card */
+}
+
+/* Custom Container */
+.custom-container {
+    max-width: 1200px; /* Lebar container diperluas */
+    margin: 0 auto; /* Agar container selalu berada di tengah */
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+
+/* Footer */
+footer {
+    background-color: #ffc2d1;
+    color: #5c5c5c;
+    padding: 20px 10px; /* Sesuaikan padding */
+    margin-top: 30px;
+    text-align: center; /* Teks di tengah */
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
